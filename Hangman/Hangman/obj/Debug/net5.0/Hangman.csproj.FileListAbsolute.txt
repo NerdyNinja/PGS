@@ -1,0 +1,16 @@
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\bin\Debug\net5.0\Hangman.exe
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\bin\Debug\net5.0\Hangman.deps.json
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\bin\Debug\net5.0\Hangman.runtimeconfig.json
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\bin\Debug\net5.0\Hangman.runtimeconfig.dev.json
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\bin\Debug\net5.0\Hangman.dll
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\bin\Debug\net5.0\ref\Hangman.dll
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\bin\Debug\net5.0\Hangman.pdb
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\obj\Debug\net5.0\Hangman.csprojAssemblyReference.cache
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\obj\Debug\net5.0\Hangman.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\obj\Debug\net5.0\Hangman.AssemblyInfoInputs.cache
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\obj\Debug\net5.0\Hangman.AssemblyInfo.cs
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\obj\Debug\net5.0\Hangman.csproj.CoreCompileInputs.cache
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\obj\Debug\net5.0\Hangman.dll
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\obj\Debug\net5.0\ref\Hangman.dll
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\obj\Debug\net5.0\Hangman.pdb
+D:\Programme\Coding\C_sharp\PGS\Hangman\Hangman\obj\Debug\net5.0\Hangman.genruntimeconfig.cache
