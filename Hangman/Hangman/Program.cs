@@ -101,7 +101,7 @@ public class HelloWorld
     }
     public static void GameLoop()
     {
-        int x = 1; // Aktuell Endlos, muss angepasst werden
+        int x = 1; // Aktuell Endlos, muss angepasst werden Test
 
         char[] UserWord = Global.UserWord.ToCharArray();
         do
