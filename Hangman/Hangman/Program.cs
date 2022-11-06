@@ -26,7 +26,6 @@ public class HelloWorld
     public static void UI()
     {
 
-
         do
         {
             //Console.Clear();
@@ -92,17 +91,15 @@ public class HelloWorld
             Global.UserWord += "#";
         }
 
-
         Console.WriteLine(Global.NumberWord + " Zeichen lang!");
         Console.WriteLine(Global.UserWord);
-
-
 
     }
     public static void GameLoop()
     {
-        int x = 1; // Aktuell Endlos, muss angepasst werden Test
-
+        // Aktuell Endlos, muss angepasst werden Test
+        int x = 1; 
+        
         char[] UserWord = Global.UserWord.ToCharArray();
         do
         {
@@ -119,7 +116,6 @@ public class HelloWorld
                 {
                     UserWord[i] = Global.Word1[i];
 
-
                 }
                 else if (cInput == Global.Word1[i])
                 {
@@ -129,9 +125,9 @@ public class HelloWorld
                 else
                 {
                     UserWord[i] = '#';
+                    //Insert Hangman here
 
                 }
-
 
             }
             Console.WriteLine(UserWord);
