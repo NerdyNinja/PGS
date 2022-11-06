@@ -14,7 +14,7 @@ public class Global
 
 }
 
-public class HelloWorld
+public class Hangman
 {
     public static void Main(string[] args)
     {
@@ -98,41 +98,46 @@ public class HelloWorld
     public static void GameLoop()
     {
         // Aktuell Endlos, muss angepasst werden Test
-        int x = 1; 
-        
+        int x = 1;
+
         char[] UserWord = Global.UserWord.ToCharArray();
-        do
+
+        try
+        {
+            do
+            {
+
+                Console.WriteLine(" ");
+                Console.Write("Gebe einen Buchstaben ein: ");
+                char cInput = Convert.ToChar(Console.ReadLine());
+
+
+                for (int i = 0; i != Global.NumberWord; i++)
+
+                {
+                    if (UserWord[i] != '#')
+                    {
+                        UserWord[i] = Global.Word1[i];
+
+                    }
+                    else if (cInput == Global.Word1[i])
+                    {
+                        UserWord[i] = Global.Word1[i];
+
+                    }
+                    else
+                    {
+                        UserWord[i] = '#';
+                        //Insert Hangman here
+
+                    }
+
+                }
+                Console.WriteLine(UserWord);
+            } while (x != 0);
+        } catch (SystemException)
         {
 
-            Console.WriteLine(" ");
-            Console.Write("Gebe einen Buchstaben ein: ");
-            char cInput = Convert.ToChar(Console.ReadLine());
-
-
-            for (int i = 0; i != Global.NumberWord; i++)
-
-            {
-                if (UserWord[i] != '#')
-                {
-                    UserWord[i] = Global.Word1[i];
-
-                }
-                else if (cInput == Global.Word1[i])
-                {
-                    UserWord[i] = Global.Word1[i];
-
-                }
-                else
-                {
-                    UserWord[i] = '#';
-                    //Insert Hangman here
-
-                }
-
-            }
-            Console.WriteLine(UserWord);
-        } while (x != 0);
-
+        };
+        }
     }
-
-}
