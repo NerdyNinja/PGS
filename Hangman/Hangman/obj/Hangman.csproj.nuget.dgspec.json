@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programme\\Coding\\C_sharp\\PGS\\Hangman\\Hangman\\Hangman.csproj": {}
+    "D:\\Programme\\Coding\\GitRepo\\PGS\\Hangman\\Hangman\\Hangman.csproj": {}
   },
   "projects": {
-    "D:\\Programme\\Coding\\C_sharp\\PGS\\Hangman\\Hangman\\Hangman.csproj": {
+    "D:\\Programme\\Coding\\GitRepo\\PGS\\Hangman\\Hangman\\Hangman.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programme\\Coding\\C_sharp\\PGS\\Hangman\\Hangman\\Hangman.csproj",
+        "projectUniqueName": "D:\\Programme\\Coding\\GitRepo\\PGS\\Hangman\\Hangman\\Hangman.csproj",
         "projectName": "Hangman",
-        "projectPath": "D:\\Programme\\Coding\\C_sharp\\PGS\\Hangman\\Hangman\\Hangman.csproj",
-        "packagesPath": "C:\\Users\\Los Mikakos\\.nuget\\packages\\",
-        "outputPath": "D:\\Programme\\Coding\\C_sharp\\PGS\\Hangman\\Hangman\\obj\\",
+        "projectPath": "D:\\Programme\\Coding\\GitRepo\\PGS\\Hangman\\Hangman\\Hangman.csproj",
+        "packagesPath": "C:\\Users\\Schan\\.nuget\\packages\\",
+        "outputPath": "D:\\Programme\\Coding\\GitRepo\\PGS\\Hangman\\Hangman\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Los Mikakos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Schan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

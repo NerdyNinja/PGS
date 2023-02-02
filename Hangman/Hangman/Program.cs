@@ -11,6 +11,9 @@ public class Global
     public static int NumberWord;
     public static string UserWord;
     public static string UserWord1;
+    public static int NumberEach = 0;
+    public static int Lives = 2;
+    public static string charToString;
 
 }
 
@@ -68,19 +71,19 @@ public class HelloWorld
     public static void StartGame()
     {
 
-        Global.List = new string[5];
-        Global.List[0] = "Kakadu";
-        Global.List[1] = "Blaubeerkuchen";
-        Global.List[2] = "Hallo";
-        Global.List[3] = "Arschloch";
-        Global.List[4] = "Pipikakasee";
+        Global.List = new string[6];
+        Global.List[0] = "Hallo";
+        Global.List[1] = "Kakadu";
+        Global.List[2] = "Atomkraftwerk";
+        Global.List[3] = "Menschlichkeit";
+        Global.List[4] = "Grünepolitik";
+        Global.List[5] = "Jeremyfegrance";
 
         Random rnd = new Random();
         int index = rnd.Next(Global.List.Length);
         Global.Word = Global.List[index];
 
         Global.Word1 = Global.Word.ToLower();
-        Console.WriteLine(Global.Word1);
 
         foreach (char c in Global.Word)
         {
@@ -94,19 +97,18 @@ public class HelloWorld
 
 
         Console.WriteLine(Global.NumberWord + " Zeichen lang!");
-        Console.WriteLine(Global.UserWord);
-
 
 
     }
     public static void GameLoop()
     {
-        int x = 1; // Aktuell Endlos, muss angepasst werden
+        int x = 1;
 
         char[] UserWord = Global.UserWord.ToCharArray();
+
         do
         {
-
+   
             Console.WriteLine(" ");
             Console.Write("Gebe einen Buchstaben ein: ");
             char cInput = Convert.ToChar(Console.ReadLine());
@@ -119,7 +121,6 @@ public class HelloWorld
                 {
                     UserWord[i] = Global.Word1[i];
 
-
                 }
                 else if (cInput == Global.Word1[i])
                 {
@@ -129,14 +130,34 @@ public class HelloWorld
                 else
                 {
                     UserWord[i] = '#';
+                    
 
                 }
-
-
             }
             Console.WriteLine(UserWord);
+
+            Global.charToString = new string(UserWord);
+
+            if (Global.charToString == Global.Word1)
+            {
+                Console.WriteLine("Du hast das Wort erraten! Es lautet: " + Global.Word);
+                Console.WriteLine("##############");
+                Console.WriteLine("Glückwunsch!");
+                x = 0;
+            }
+
         } while (x != 0);
 
     }
 
 }
+
+
+
+//Global.Lives--;
+//if (Global.Lives == 0)
+//{
+//    Console.WriteLine("Game Over");
+//    Console.WriteLine("###########");
+//    Console.WriteLine("Du hast verloren");
+//}
