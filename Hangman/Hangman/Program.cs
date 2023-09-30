@@ -12,8 +12,13 @@ public class Global
     public static string UserWord;
     public static string UserWord1;
     public static int NumberEach = 0;
+    //Lives still have +1 cause of the loop 2=3.. something to handle later with
     public static int Lives = 2;
     public static string charToString;
+    public static bool MinusLife = false;
+    public static bool MinusLife1 = false;
+    public static bool CorrectChar = false;
+    public static bool CorrectChar1 = false;
 
 }
 
@@ -97,7 +102,7 @@ public class HelloWorld
 
 
         Console.WriteLine(Global.NumberWord + " Zeichen lang!");
-
+        Console.WriteLine(Global.Word);
 
     }
     public static void GameLoop()
@@ -108,11 +113,18 @@ public class HelloWorld
 
         do
         {
-   
+
+            if (Global.MinusLife == true)
+            {
+                Global.Lives--;
+            }
+
+            Global.CorrectChar = false;
+            Global.MinusLife = false;
+
             Console.WriteLine(" ");
             Console.Write("Gebe einen Buchstaben ein: ");
             char cInput = Convert.ToChar(Console.ReadLine());
-
 
             for (int i = 0; i != Global.NumberWord; i++)
 
@@ -120,20 +132,25 @@ public class HelloWorld
                 if (UserWord[i] != '#')
                 {
                     UserWord[i] = Global.Word1[i];
-
                 }
+
                 else if (cInput == Global.Word1[i])
                 {
                     UserWord[i] = Global.Word1[i];
-
+                    Global.CorrectChar = true;
                 }
+
                 else
                 {
                     UserWord[i] = '#';
-                    
-
                 }
             }
+
+            if (Global.CorrectChar != true)
+            {
+                Global.MinusLife = true;
+            }
+
             Console.WriteLine(UserWord);
 
             Global.charToString = new string(UserWord);
@@ -146,18 +163,17 @@ public class HelloWorld
                 x = 0;
             }
 
+            if (Global.Lives == 0)
+            {
+                Console.WriteLine("Game Over");
+                Console.WriteLine("###########");
+                Console.WriteLine("Du hast verloren");
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
+
         } while (x != 0);
 
     }
 
 }
-
-
-
-//Global.Lives--;
-//if (Global.Lives == 0)
-//{
-//    Console.WriteLine("Game Over");
-//    Console.WriteLine("###########");
-//    Console.WriteLine("Du hast verloren");
-//}
