@@ -12,7 +12,6 @@ public class Global
     public static string UserWord;
     public static string UserWord1;
     public static int NumberEach = 0;
-    //Lives still have +1 cause of the loop 2=3.. something to handle later with
     public static int Lives = 2;
     public static string charToString;
     public static bool MinusLife = false;
@@ -29,6 +28,12 @@ public class HelloWorld
         UI();
         StartGame();
         GameLoop();
+        //TODO:
+        //Printen dass der User Minusleben bekommen hat
+        //Aktuellen Hangman zeichnen?
+        //Schwierigkeitsstufen kann im UI gewählt werden
+        //Wörter werden random von einem web request geholt
+        //
     }
 
     public static void UI()
@@ -100,9 +105,7 @@ public class HelloWorld
             Global.UserWord += "#";
         }
 
-
         Console.WriteLine(Global.NumberWord + " Zeichen lang!");
-        Console.WriteLine(Global.Word);
 
     }
     public static void GameLoop()
@@ -113,11 +116,6 @@ public class HelloWorld
 
         do
         {
-
-            if (Global.MinusLife == true)
-            {
-                Global.Lives--;
-            }
 
             Global.CorrectChar = false;
             Global.MinusLife = false;
@@ -151,16 +149,9 @@ public class HelloWorld
                 Global.MinusLife = true;
             }
 
-            Console.WriteLine(UserWord);
-
-            Global.charToString = new string(UserWord);
-
-            if (Global.charToString == Global.Word1)
+            if (Global.MinusLife == true)
             {
-                Console.WriteLine("Du hast das Wort erraten! Es lautet: " + Global.Word);
-                Console.WriteLine("##############");
-                Console.WriteLine("Glückwunsch!");
-                x = 0;
+                Global.Lives--;
             }
 
             if (Global.Lives == 0)
@@ -172,6 +163,17 @@ public class HelloWorld
                 Environment.Exit(0);
             }
 
+            Console.WriteLine(UserWord);
+
+            Global.charToString = new string(UserWord);
+
+            if (Global.charToString == Global.Word1)
+            {
+                Console.WriteLine("Du hast das Wort erraten! Es lautet: " + Global.Word);
+                Console.WriteLine("##############");
+                Console.WriteLine("Glückwunsch!");
+                x = 0;
+            }
         } while (x != 0);
 
     }
