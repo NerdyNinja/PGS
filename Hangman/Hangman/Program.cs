@@ -10,6 +10,8 @@ public class Global
     public static string UserInput = "";
     public static char c;
     public static char cInput;
+    public static string uInput;
+    public static string sInput;
     public static string Number;
     public static string[] List;
     public static List<char> UsedChars = new List<char>();
@@ -23,7 +25,7 @@ public class Global
     public static int Lives = 2;
     public static string GamemMode = "0";
     public static string charToString;
-    public static bool ContainsWhiteSpacesEg;
+    public static bool ContainsWhiteSpacesEg = false;
     public static bool alreadyUsed = false;
     public static bool MinusLife = false;
     public static bool MinusLife1 = false;
@@ -32,19 +34,19 @@ public class Global
 
 }
 
-    //TODO:
-    //Aktuellen Hangman zeichnen?
-    //Code Comments machen
-    //Je nach GameMode die Anzahl der Chars des generierenden Wort cappen
-    //
+//TODO:
+//Aktuellen Hangman zeichnen?
+//Code Comments machen
+//Je nach GameMode die Anzahl der Chars des generierenden Wort cappen
+//
 
-    //Testing:
-    //Wörter werden random von einem web request geholt --> Wird jetzt durch BogusLib generiert, aktuell nur English (bug)?
-    //Schwierigkeitsstufen kann im UI gewählt werden --> Done? Sieht auf den ersten UseTest gut aus / muss debuggt werden
-    //Bereits Benutzte Buchstaben speichern und keine erneute Eingabe zulassen = kein MinusLeben mehr --> sollte Done sein
+//Testing:
+//Wörter werden random von einem web request geholt --> Wird jetzt durch BogusLib generiert, aktuell nur English (bug)?
+//Schwierigkeitsstufen kann im UI gewählt werden --> Done? Sieht auf den ersten UseTest gut aus / muss debuggt werden
+//Bereits Benutzte Buchstaben speichern und keine erneute Eingabe zulassen = kein MinusLeben mehr --> sollte Done sein
 
 
-      
+
 
 public class HelloWorld
 {
@@ -52,7 +54,7 @@ public class HelloWorld
     {
         UI();
         StartGame();
-        GameLoop();  
+        GameLoop();
     }
 
     public static void UI()
@@ -86,12 +88,12 @@ public class HelloWorld
 
                 do
                 {
-                Console.WriteLine("Welche Schwierigkeitsgrad moechtest du wählen?\nFolgendes steht zur Auswahl: Easy[1] -- Medium[2] -- Hard[3]");
-                Console.WriteLine(" ");
-                Console.WriteLine(" ");
-                Console.Write("Wäle deinen Schwierigskeitsgrad: ");
+                    Console.WriteLine("Welche Schwierigkeitsgrad moechtest du wählen?\nFolgendes steht zur Auswahl: Easy[1] -- Medium[2] -- Hard[3]");
+                    Console.WriteLine(" ");
+                    Console.WriteLine(" ");
+                    Console.Write("Wäle deinen Schwierigskeitsgrad: ");
 
-                Global.GamemMode = Convert.ToString(Console.ReadLine());
+                    Global.GamemMode = Convert.ToString(Console.ReadLine());
 
                     switch (Global.GamemMode)
                     {
@@ -106,13 +108,13 @@ public class HelloWorld
                             Console.WriteLine($"Du hast dich für Easy entschieden, du besitzt also {Global.Lives} Leben!");
                             Global.GamemMode = "2";
                             break;
-                        
+
                         case "3":
                             Global.Lives = 2;
                             Console.WriteLine($"Du hast dich für Easy entschieden, du besitzt also {Global.Lives} Leben!");
                             Global.GamemMode = "3";
                             break;
-                        
+
                         default:
                             Console.WriteLine("Das war keine korrekte Eingabe!");
                             Global.GamemMode = "0";
@@ -141,21 +143,22 @@ public class HelloWorld
     public static void StartGame()
     {
         var fakerWord = new Faker("de"); //Bug in Bogus? Erzeugt dennoch Englishe Wörter
-        
-        do 
+
+        do
         {
-        var RandomWord = fakerWord.Random.Word();
+            Global.RandomWord = fakerWord.Random.Word();
 
-        if (RandomWord.Contains('-') || RandomWord.Contains(' '))
-        {
-            Global.ContainsWhiteSpacesEg = true; 
-        }
+            if (Global.RandomWord.Contains('-') || Global.RandomWord.Contains(' ') || Global.RandomWord.Length <= 3)
+            {
+                Global.ContainsWhiteSpacesEg = true;
+            }
+        } while (Global.ContainsWhiteSpacesEg == true);
 
-        Global.RandomWord = RandomWord.ToLower();
+        Global.RandomWord = Global.RandomWord.ToLower();
+        Console.WriteLine($"Ich bin das Randmword: {Global.RandomWord}");
 
-        }while(Global.ContainsWhiteSpacesEg!=true);
 
-        
+
         foreach (char c in Global.RandomWord)
         {
             Global.NumberWord++;
@@ -186,89 +189,130 @@ public class HelloWorld
                 Console.WriteLine(" ");
                 Console.Write("Gebe einen Buchstaben ein: ");
 
-                Global.cInput = Convert.ToChar(Console.ReadLine());
-                if (Global.UsedChars.Contains(Global.cInput))
+                Global.uInput = Console.ReadLine();
+                Global.uInput = Global.uInput.ToLower();
+
+                if (char.TryParse(Global.uInput, out Global.cInput))
                 {
-                    Console.WriteLine($"Den Buchstaben {Global.cInput} hast du bereits benutzt");
-                    Global.alreadyUsed = true;
+                    if (Global.UsedChars.Contains(Global.cInput))
+                    {
+                        Console.WriteLine($"Den Buchstaben {Global.cInput} hast du bereits benutzt");
+                        Global.alreadyUsed = true;
+                    }
+                    else if (!Global.UsedChars.Contains(Global.cInput))
+                    {
+                        Global.alreadyUsed = false;
+                    }
+
+                    Global.UsedChars.Add(Global.cInput);
+
+                    for (int i = 0; i != Global.NumberWord; i++)
+
+                    {
+                        if (UserWord[i] != '#')
+                        {
+                            UserWord[i] = Global.RandomWord[i];
+                        }
+
+                        else if (Global.cInput == Global.RandomWord[i])
+                        {
+                            UserWord[i] = Global.RandomWord[i];
+                            Global.CorrectChar = true;
+                        }
+
+                        else
+                        {
+                            UserWord[i] = '#';
+                        }
+                    }
+
+                    if (Global.CorrectChar != true)
+                    {
+                        Global.MinusLife = true;
+                    }
+                    else
+                    {
+                        //Userword gab falschen Wert zrk daher der workaround aus line190
+                        Console.WriteLine(" ");
+                        Console.WriteLine(" ");
+                        Console.WriteLine("Deine Eingabe war korrekt!");
+                        Console.Write("Das aktuelle Wort lautet: ");
+                    }
+
+                    if (Global.MinusLife == true)
+                    {
+                        Global.Lives--;
+
+                        if (Global.Lives == 0)
+                        {
+                            Console.WriteLine("Game Over");
+                            Console.WriteLine("###########");
+                            Console.WriteLine("Du hast verloren");
+                            Console.WriteLine(" ");
+                            Console.WriteLine($"Das gesuchte Wort lautete {Global.RandomWord}!");
+                            Console.ReadLine();
+                            Environment.Exit(0);
+                        }
+
+                        Console.WriteLine("Du hast 1 Leben verloren!");
+                        Console.WriteLine("Du besitzt noch: " +
+                        Global.Lives + " uebrige Leben!");
+                    }
+
+                    //sollte das nicht in den else Block zu das aktuelle WOrt lautet..
+                    Console.WriteLine(UserWord);
+
+                    Global.charToString = new string(UserWord);
+
+                    if (Global.charToString == Global.RandomWord)
+                    {
+                        Console.WriteLine("Du hast das Wort erraten! Es lautet: " + Global.RandomWord);
+                        Console.WriteLine("##############");
+                        Console.WriteLine("Glückwunsch!");
+                        Console.ReadKey();
+                        x = 0;
+                    }
+
                 }
-                else if (!Global.UsedChars.Contains(Global.cInput))
+                else if (Global.uInput.Length > 1)
                 {
-                    Global.alreadyUsed = false;
+                    Console.WriteLine($"Hallo Zeile 278{Global.sInput}");
+
+                    if (Global.uInput == Global.RandomWord)
+                    {
+                        Console.WriteLine("Du hast das Wort erraten! Es lautet: " + Global.RandomWord);
+                        Console.WriteLine("##############");
+                        Console.WriteLine("Glückwunsch!");
+                        Console.ReadKey();
+                        x = 0;
+                    }
+                    else
+                    {
+                        Global.MinusLife = true;
+                        Global.Lives = Global.Lives - 2;
+
+                        if (Global.Lives == 0)
+                        {
+                            Console.WriteLine("Game Over");
+                            Console.WriteLine("###########");
+                            Console.WriteLine("Du hast verloren");
+                            Console.WriteLine(" ");
+                            Console.WriteLine($"Das gesuchte Wort lautete {Global.RandomWord}!");
+                            Console.ReadLine();
+                            Environment.Exit(0);
+                        }
+
+                        Console.WriteLine("Du hast 2 Leben verloren!");
+                        Console.WriteLine("Du besitzt noch: " +
+                        Global.Lives + " uebrige Leben!");
+
+                    }
                 }
 
-            }while(Global.alreadyUsed == true);
+            } while (Global.alreadyUsed == true);
 
-            Global.UsedChars.Add(Global.cInput);
 
-            for (int i = 0; i != Global.NumberWord; i++)
-
-            {
-                if (UserWord[i] != '#')
-                {
-                    UserWord[i] = Global.RandomWord[i];
-                }
-
-                else if (Global.cInput == Global.RandomWord[i])
-                {
-                    UserWord[i] = Global.RandomWord[i];
-                    Global.CorrectChar = true;
-                }
-
-                else
-                {
-                    UserWord[i] = '#';
-                }
-            }
-
-            if (Global.CorrectChar != true)
-            {
-                Global.MinusLife = true;
-            }
-            else
-            {
-                //Userword gab falschen Wert zrk daher der workaround aus line190
-                Console.WriteLine(" ");
-                Console.WriteLine(" ");
-                Console.WriteLine("Deine Eingabe war korrekt!");
-                Console.Write("Das aktuelle Wort lautet: ");
-            }
-
-            if (Global.MinusLife == true)
-            {
-                Global.Lives--;
-
-                if (Global.Lives == 0)
-                {
-                Console.WriteLine("Game Over");
-                Console.WriteLine("###########");
-                Console.WriteLine("Du hast verloren");
-                Console.WriteLine(" ");
-                Console.WriteLine($"Das gesuchte Wort lautete {Global.RandomWord}!");
-                Console.ReadLine();
-                Environment.Exit(0);
-                }
-
-                Console.WriteLine("Du hast 1 Leben verloren!");
-                Console.WriteLine("Du besitzt noch: " + 
-                Global.Lives + " uebrige Leben!");
-            }
-
-            //sollte das nicht in den else Block zu das aktuelle WOrt lautet..
-            Console.WriteLine(UserWord);
-
-            Global.charToString = new string(UserWord);
-
-            if (Global.charToString == Global.RandomWord)
-            {
-                Console.WriteLine("Du hast das Wort erraten! Es lautet: " + Global.RandomWord);
-                Console.WriteLine("##############");
-                Console.WriteLine("Glückwunsch!");
-                Console.ReadKey();
-                x = 0;
-            }
         } while (x != 0);
-
     }
 
 }
